@@ -1,6 +1,6 @@
 #include <iostream>
 
-// Program prints greeting message with user input
+// Program prints,,,,, greeting message with user input
 int main() {
     std::string name;
     std::cin >> name;
