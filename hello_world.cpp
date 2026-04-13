@@ -1,9 +1,10 @@
 #include <iostream>
-using namespace std;
 
+// Program prints greeting message with user input
 int main() {
-    string name;
-    cin >> name;
-    cout << "Hello world from " << name << endl;
+    std::string name;
+    std::cin >> name;
+    // output greeting
+    std::cout << "Hello world from " << name << std::endl;
     return 0;
 }
