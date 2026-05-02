@@ -214,3 +214,114 @@ git checkout main
 git pull origin main
 git branch -d patch2
 ```
+## Добавление нового изменения, демонстрация вывода после команд
+```bash
+git checkout -b patch2
+```
+```bash
+Switched to a new branch 'patch2'
+```
+### Изменение файла hello_world.cpp
+```bash
+nano hello_world.cpp
+```
+```cpp
+#include <iostream>
+
+// Program prints greeting message with user input
+// New comment
+int main() {
+    std::string name;
+    std::cin >> name;
+    // output greeting
+    std::cout << "Hello world from " << name << std::endl;
+    return 0;
+}
+```
+### Commit
+```bash
+git add hello_world.cpp
+git commit -m "add patch2 new comment"
+```
+```bash
+[patch2 c60f5c3] add patch2 new comment
+ 1 file changed, 1 insertion(+)
+```
+### Push
+```bash
+git push origin patch2
+```
+```bash
+Username for 'https://github.com': maksnn78
+Password for 'https://maksnn78@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 328 bytes | 328.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'patch2' on GitHub by visiting:
+remote:      https://github.com/maksnn78/lab2/pull/new/patch2
+remote: 
+To https://github.com/maksnn78/lab2
+ * [new branch]      patch2 -> patch2
+```
+### Rebase
+```bash
+git checkout main
+```
+```bash
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+```
+```bash
+git pull origin main
+```
+```bash
+From https://github.com/maksnn78/lab2
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+```
+```bash
+git checkout patch2
+```
+```bash
+Switched to branch 'patch2'
+```
+```bash
+git rebase main
+```
+```bash
+Current branch patch2 is up to date.
+```
+### Push after rebase
+```bash
+git push origin patch2 --force
+```
+```bash
+Username for 'https://github.com': maksnn78
+Password for 'https://maksnn78@github.com': 
+Everything up-to-date
+```
+```bash
+git log --oneline --graph --all
+```
+```bash
+* c60f5c3 (HEAD -> patch2, origin/patch2) add patch2 new comment
+* bacf66e (origin/main, origin/HEAD, main) Update README.md
+*   7d457b6 Merge pull request #2 from maksnn78/patch2
+|\  
+| * 70bcf4b format code with clang-format
+|/  
+* 34a7a7c Update hello_world.cpp
+*   f6ed42e Merge pull request #1 from maksnn78/patch1
+|\  
+| * ee4457a add comments
+| * 83cdd44 fix style: remove using namespace
+|/  
+* 3fa42c3 add user input
+* 4d3559d Update hello_world.cpp
+* 512c0c0 initial commit: hello world
+```
